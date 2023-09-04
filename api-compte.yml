@@ -10,6 +10,18 @@ spring:
   # nom de l'application
   application:
     name: api-compte
+  # Ce sont les parametres de sécurité
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: https://keycloackdev.afrilins.net/auth/realms/springBootkeycloak/protocol/openid-connect/token
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            client-secret: 4cee3515-2c12-42e5-8d9c-1e4d595774f3
+            client-id: my_hotel
 #configuration client eureka
 eureka:
 
@@ -22,3 +34,15 @@ eureka:
 #port de l'api
 server:
   port: 8808
+
+
+#ceci concerne la configuration minimale pour mon keyclok
+keycloak:
+  realm: springBootkeycloak # C'est le nom de mon domaine
+  auth-server-url:  https://keycloackdev.afrilins.net/auth
+  #  auth-server-url: https://keycloackdev.afrilins.net/auth
+  ssl-required: external
+  resource: my_hotel # c'est mon id client dans keycloak
+  bearer-only: true # permet d'avoir accès au token
+  credentials:
+    secret: 4cee3515-2c12-42e5-8d9c-1e4d595774f3 # Vue que mon client à été défini comme confidentiel alors cela nécessite son mot de passe
